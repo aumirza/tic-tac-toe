@@ -1,0 +1,65 @@
+:root {
+  --gradient-main: linear-gradient(to right, #2790fa, #3498db);
+}
+
+.app-header {
+  padding: 0.5em 0;
+  text-align: center;
+  color: white;
+  background: var(--gradient-main);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.app-title {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: bold; /* font-bold */
+  font-family: "Arial", sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 768px) {
+  .app-title {
+    font-size: 1.875rem; /* md:text-3xl */
+  }
+}
+
+.app-main {
+  flex-grow: 1;
+  display: flex;
+  padding: 0.25em;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+}
+
+.app-footer {
+  background: var(--gradient-main);
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  color: white; /* text-white */
+  padding-top: 1rem; /* py-4 (top and bottom padding) */
+  padding-bottom: 1rem;
+  text-align: center; /* text-center */
+  font-size: 0.875rem; /* text-sm */
+}
+
+.heart-icon {
+  color: #e74c3c;
+  animation: pulse 1.5s infinite;
+}
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

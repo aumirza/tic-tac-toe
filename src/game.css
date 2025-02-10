@@ -1,0 +1,92 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  height: 100%;
+}
+
+.gameboard {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  background: #ddd;
+  margin: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: green;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.square img {
+  height: 2.5rem;
+}
+
+.square.highlight {
+  background-color: #90ee90;
+  position: relative;
+}
+
+.board-row {
+  display: flex;
+}
+
+.board {
+  background-color: #eee;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  border: 3px #eee solid;
+}
+
+.status {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-weight: 500;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.controls {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.reset-button {
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
+  background-color: rgb(221, 50, 50);
+  border: none;
+  border-radius: 0.3rem;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.audio-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.3rem;
+  height: 2.5rem;
+  cursor: pointer;
+}
