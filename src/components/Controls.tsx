@@ -9,11 +9,7 @@ export function Controls({ handleReset }: ControlsProps) {
 
   return (
     <div className="controls">
-      <button
-        className="audio-button"
-        onClick={toggleSound}
-        style={soundEnabled ? { backgroundColor: "green" } : {}}
-      >
+      <button className="audio-button" onClick={toggleSound}>
         {soundEnabled ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -52,11 +48,7 @@ export function Controls({ handleReset }: ControlsProps) {
           </svg>
         )}
       </button>
-      <button
-        className="audio-button"
-        onClick={toggleMusic}
-        style={musicEnabled ? { backgroundColor: "green" } : {}}
-      >
+      <button className="audio-button" onClick={toggleMusic}>
         {musicEnabled ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
