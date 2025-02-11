@@ -6,7 +6,7 @@ A **Tic-Tac-Toe** game built with **Preact**, **TypeScript**, **Vite**, and **Pl
 
 ## 🚀 Live Demo
 
-🔗 [Play Now](#) (Replace with the actual link)
+🔗 [Play Now](https://gh.ahmadullah.in/tic-tac-toe)
 
 ---
 
@@ -52,7 +52,7 @@ The game’s AI uses the **Minimax Algorithm** to make optimal moves, ensuring a
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/yet-another-tic-tac-toe.git
+git clone https://github.com/aumirza/tic-tac-toe.git
 
 # Navigate to the project directory
 cd yet-another-tic-tac-toe
