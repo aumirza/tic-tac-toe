@@ -5,7 +5,7 @@ interface WinnerProps {
   onReset: () => void;
 }
 
-export default function Winner({ winner, onReset }: WinnerProps) {
+export function Winner({ winner, onReset }: WinnerProps) {
   const src = getPlayerIcon(winner);
   return (
     <div className="winner">

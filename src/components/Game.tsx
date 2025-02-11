@@ -6,9 +6,7 @@ import { useAudio } from "../hooks/useAudio";
 import { throwConfetti } from "../utils/confetti";
 import { Board } from "./Board";
 import { Controls } from "./Controls";
-import { getPlayerIcon } from "../utils/playerIcon";
-import { celebrate } from "../utils/celebrate";
-import Winner from "./Winner";
+import { Winner } from "./Winner";
 
 export function Game() {
   const [player, setPlayer] = useState<IPlayer>(1);
