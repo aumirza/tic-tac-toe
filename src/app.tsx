@@ -18,8 +18,8 @@ export function App() {
 
         <footer className="app-footer">
           <p>
-            Created with <span className="heart-icon">❤️</span>{" "}
-            <a href="https://ahamdullah.in">Ahmadullah mirza</a>
+            Created with <span className="heart-icon">❤️</span> by
+            <a href="https://ahmadullah.in">Ahmadullah mirza</a>
           </p>
           <p>&copy; {new Date().getFullYear()} All rights reserved</p>
         </footer>
