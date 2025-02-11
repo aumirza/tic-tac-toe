@@ -90,3 +90,10 @@
   height: 2.5rem;
   cursor: pointer;
 }
+
+.faded-image {
+  opacity: 0;
+}
+.square:hover .faded-image {
+  opacity: 50%;
+}

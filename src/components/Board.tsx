@@ -2,9 +2,8 @@ import { useState, useImperativeHandle } from "preact/hooks";
 import { Square } from "./Square";
 import { forwardRef } from "preact/compat";
 
-const emptyBoard = JSON.parse(
-  JSON.stringify(new Array(3).fill(0).map(() => new Array(3).fill(0)))
-) as IBoard;
+const emptyBoard = () =>
+  new Array(3).fill(0).map(() => new Array(3).fill(0)) as IBoard;
 
 interface BoardProps {
   onMark: (board: IBoard) => void;
@@ -14,20 +13,25 @@ interface BoardProps {
 
 export const Board = forwardRef<BoardHandle, BoardProps>(
   ({ onMark, player, winningLine }, ref) => {
-    const [board, setBoard] = useState<IBoard>(emptyBoard);
+    useImperativeHandle(ref, () => ({ resetBoard }));
+
+    const [board, setBoard] = useState<IBoard>(emptyBoard());
 
     const resetBoard = () => {
-      setBoard(emptyBoard);
+      setBoard(emptyBoard());
     };
-    useImperativeHandle(ref, () => ({ resetBoard }));
 
     const handleMark = (i: number, j: number) => {
       if (board[i][j] !== 0) return;
 
-      const newBoard = JSON.parse(JSON.stringify(board));
-      newBoard[i][j] = player;
-      setBoard(newBoard);
+      const newBoard = board.map((row, rowIndex) =>
+        rowIndex === i
+          ? row.map((cell, colIndex) => (colIndex === j ? player : cell))
+          : row
+      );
+
       onMark(newBoard);
+      setBoard(newBoard);
     };
 
     return (
@@ -36,7 +40,8 @@ export const Board = forwardRef<BoardHandle, BoardProps>(
           <div key={i} className="board-row">
             {row.map((col, j) => (
               <Square
-                player={col as IPlayer}
+                mark={col as IPlayer}
+                player={player}
                 onClick={() => handleMark(i, j)}
                 key={i + "" + j}
                 highlight={winningLine.some(([x, y]) => x === i && y === j)}
