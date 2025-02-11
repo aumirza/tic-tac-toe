@@ -112,7 +112,7 @@ export function Controls({ handleReset, isMulti, setItMulti }: ControlsProps) {
         className={`multi-button ${!isMulti ? "active" : ""}`}
         onClick={toggleMulti}
       >
-        {isMulti ? "Multiplayer" : "computer"}
+        {isMulti ? "Multiplayer" : "Computer"}
       </button>
     </div>
   );
