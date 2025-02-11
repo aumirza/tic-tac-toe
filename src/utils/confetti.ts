@@ -6,7 +6,7 @@ const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
 const randomInRange = (min: number, max: number) => {
   return Math.random() * (max - min) + min;
 };
-export function celebrate() {
+export function throwConfetti() {
   const animationEnd = Date.now() + duration;
 
   const interval = setInterval(function () {

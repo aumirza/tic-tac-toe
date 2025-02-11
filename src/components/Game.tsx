@@ -1,10 +1,11 @@
 import { useRef, useState } from "preact/hooks";
 import "../game.css";
 
-import { Board } from "../components/Board";
 import { checkWinner } from "../utils/checkWinner";
-import { Controls } from "../components/Controls";
 import { useAudio } from "../hooks/useAudio";
+import { throwConfetti } from "../utils/confetti";
+import { Board } from "./Board";
+import { Controls } from "./Controls";
 import { getPlayerIcon } from "../utils/playerIcon";
 import { celebrate } from "../utils/celebrate";
 import Winner from "./Winner";
@@ -29,14 +30,18 @@ export function Game() {
     setPlayer(player === 1 ? -1 : 1);
   };
 
+  const celebrateWin = () => {
+    throwConfetti();
+    playWinAudio();
+  };
+
   const onMark = (board: IBoard) => {
     if (winner) return;
     playClickAudio();
 
     const result = checkWinner(board);
     if (result.winner) {
-      celebrate();
-      playWinAudio();
+      celebrateWin();
       setWinner(result.winner as IPlayer);
       setWinningLine(result.line);
       return setPlayer(0);
