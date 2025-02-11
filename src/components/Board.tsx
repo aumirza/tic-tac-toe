@@ -1,6 +1,7 @@
 import { useState, useImperativeHandle } from "preact/hooks";
 import { Square } from "./Square";
 import { forwardRef } from "preact/compat";
+import { bestMove } from "../utils/computer";
 
 const emptyBoard = () =>
   new Array(3).fill(0).map(() => new Array(3).fill(0)) as IBoard;
@@ -21,17 +22,12 @@ export const Board = forwardRef<BoardHandle, BoardProps>(
       setBoard(emptyBoard());
     };
 
-    const emptyCells = () =>
-      board
-        .map((row, i) => row.map((cell, j) => (cell === 0 ? [i, j] : null)))
-        .flat()
-        .filter(Boolean) as [number, number][];
-
     const computerMove = () => {
-      const allEmptyCells = emptyCells();
-      const randomIndex = Math.floor(Math.random() * allEmptyCells.length);
-      const [i, j] = emptyCells()[randomIndex];
-      handleMark(i, j);
+      const move = bestMove(board);
+      if (move) {
+        const [i, j] = move;
+        handleMark(i, j);
+      }
     };
 
     const handleMark = (i: number, j: number) => {
