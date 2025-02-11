@@ -3,6 +3,9 @@
   padding: 0;
   margin: 0;
 }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 .game {
   display: flex;
@@ -13,10 +16,41 @@
   height: 100%;
 }
 
-.gameboard {
+.game-board {
+  position: relative;
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+.winner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgb(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25em;
+  border-radius: 0.25em;
+  z-index: 20;
+  color: white;
+  font-size: 2rem;
+}
+
+.winner img {
+  height: 2rem;
+  z-index: 30;
+  filter: brightness(10) invert(1);
+}
+
+.winner-player {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
 }
 
 .square {
@@ -61,7 +95,6 @@
   margin-bottom: 5px;
   font-weight: 500;
   font-size: 16px;
-  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -80,6 +113,17 @@
   border-radius: 0.3rem;
   color: white;
   font-size: 16px;
+  cursor: pointer;
+}
+
+.again-button {
+  display: flex;
+  align-items: center;
+  padding: 0.4em 0.8em;
+  border-radius: 0.2em;
+  border: none;
+  box-shadow: 2px 2px 4px #000;
+  gap: 0.5em;
   cursor: pointer;
 }
 
