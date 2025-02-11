@@ -43,17 +43,17 @@ export function checkWinner(board: IBoard) {
   ];
 
   for (const pattern of winPatterns) {
-    const [a, b, c] = pattern;
-    const value = board[a[0]][a[1]];
+    const [[ax, ay], [bx, by], [cx, cy]] = pattern;
+    const value = board[ax][ay];
 
-    if (
-      value !== 0 &&
-      value === board[b[0]][b[1]] &&
-      value === board[c[0]][c[1]]
-    ) {
-      return { winner: value, line: pattern };
+    if (!value) continue; // Skip empty cells
+    if (value === board[bx][by] && value === board[cx][cy]) {
+      return { winner: value, line: pattern, isTie: false };
     }
   }
 
-  return { winner: 0, line: [] };
+  const isTie = board.flat().every((cell) => cell !== 0);
+  if (isTie) return { winner: 0, line: [] };
+
+  return { winner: null, line: [] };
 }
