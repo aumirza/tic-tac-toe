@@ -1,9 +1,10 @@
 :root {
-  --gradient-main: linear-gradient(to right, #2790fa, #3498db);
+  --primary: #ff758c;
+  --gradient-main: linear-gradient(to right, #ff7eb3, #ff758c, #ff7eb3);
 }
 
 .app-header {
-  padding: 0.5em 0;
+  padding: 1em 0;
   text-align: center;
   color: white;
   background: var(--gradient-main);
@@ -34,12 +35,12 @@
 
 .app-footer {
   background: var(--gradient-main);
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
   color: white; /* text-white */
-  padding-top: 1rem; /* py-4 (top and bottom padding) */
-  padding-bottom: 1rem;
+  padding: 1rem 0;
   text-align: center; /* text-center */
-  font-size: 0.875rem; /* text-sm */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
 }
 
 .heart-icon {

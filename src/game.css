@@ -12,7 +12,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.5em;
+  gap: 0.8em;
   height: 100%;
 }
 
@@ -91,13 +91,14 @@ body {
 }
 
 .status {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  font-weight: 500;
-  font-size: 16px;
+  font-weight: bold;
+  font-size: 2rem;
   display: flex;
-  justify-content: center;
   align-items: center;
+}
+
+.status img {
+  height: 2.5rem;
 }
 
 .controls {
@@ -108,7 +109,7 @@ body {
 .reset-button {
   height: 2.5rem;
   padding: 0.5rem 1rem;
-  background-color: rgb(221, 50, 50);
+  background-color: var(--primary);
   border: none;
   border-radius: 0.3rem;
   color: white;
@@ -141,10 +142,12 @@ body {
   border-radius: 0.3rem;
   height: 2.5rem;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .multi-button.active {
-  background: rgb(233, 44, 44);
+  background: var(--primary);
+  color: white;
 }
 
 .faded-image {
