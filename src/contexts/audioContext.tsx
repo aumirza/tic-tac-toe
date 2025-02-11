@@ -6,6 +6,8 @@ interface IAudioContext {
   soundEnabled: boolean;
   musicEnabled: boolean;
   playClickAudio: () => void;
+  playLooseAudio: () => void;
+  playDrawSound: () => void;
   playWinAudio: () => void;
   toggleSound: () => void;
   toggleMusic: () => void;
@@ -16,6 +18,8 @@ export const AudioContext = createContext<IAudioContext>({
   musicEnabled: true,
   playClickAudio: () => {},
   playWinAudio: () => {},
+  playLooseAudio: () => {},
+  playDrawSound: () => {},
   toggleSound: () => {},
   toggleMusic: () => {},
 });
@@ -32,7 +36,6 @@ export const AudioProvider = ({ children }: { children: ReactElement }) => {
     setSoundEnabled((prev) => !prev);
   };
 
-  // Store Howl instances in refs so they persist across renders
   const clickAudioRef = useRef(new Howl({ src: ["/click.mp3"], volume: 1 }));
 
   const bgMusicRef = useRef(
@@ -40,6 +43,36 @@ export const AudioProvider = ({ children }: { children: ReactElement }) => {
   );
 
   const winSoundRef = useRef(new Howl({ src: ["/win.mp3"], volume: 1 }));
+  const looseSoundRef = useRef(new Howl({ src: ["/loose.mp3"], volume: 1 }));
+  const drawSoundRef = useRef(new Howl({ src: ["/draw.mp3"], volume: 1 }));
+
+  const playLooseAudio = () => {
+    if (!soundEnabled) return;
+    bgMusicRef.current.pause();
+    looseSoundRef.current.play();
+
+    looseSoundRef.current.on("end", () => {
+      if (musicEnabled) {
+        setTimeout(() => {
+          bgMusicRef.current.play();
+        }, 1000);
+      }
+    });
+  };
+
+  const playDrawSound = () => {
+    if (!soundEnabled) return;
+    bgMusicRef.current.pause();
+    drawSoundRef.current.play();
+
+    drawSoundRef.current.on("end", () => {
+      if (musicEnabled) {
+        setTimeout(() => {
+          bgMusicRef.current.play();
+        }, 1000);
+      }
+    });
+  };
 
   const playWinAudio = () => {
     if (!soundEnabled) return;
@@ -77,6 +110,8 @@ export const AudioProvider = ({ children }: { children: ReactElement }) => {
         musicEnabled,
         playClickAudio,
         playWinAudio,
+        playLooseAudio,
+        playDrawSound,
         toggleSound,
         toggleMusic,
       }}

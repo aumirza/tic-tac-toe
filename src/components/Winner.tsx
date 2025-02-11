@@ -2,16 +2,35 @@ import { getPlayerIcon } from "../utils/playerIcon";
 
 interface WinnerProps {
   winner: IPlayer;
+  isMulti: boolean;
   onReset: () => void;
 }
 
-export function Winner({ winner, onReset }: WinnerProps) {
-  const src = getPlayerIcon(winner);
+export function Winner({ isMulti, winner, onReset }: WinnerProps) {
   return (
     <div className="winner">
-      <h3>Winner</h3>
+      <h3>
+        {isMulti
+          ? winner
+            ? "Winner"
+            : "Draw"
+          : new Map([
+              [1, "Winner"],
+              [0, "Draw"],
+              [-1, "Looser"],
+            ]).get(winner) || ""}
+      </h3>
+
       <div className="winner-player">
-        Player <img src={src} alt="" /> Won
+        {isMulti && winner ? (
+          <span>
+            Player <img src={getPlayerIcon(winner)} alt="" /> Won
+          </span>
+        ) : (
+          ""
+        )}
+
+        {!winner ? <span>Its draw</span> : ""}
       </div>
       <button onClick={onReset} className="again-button">
         <span>Play Again</span>

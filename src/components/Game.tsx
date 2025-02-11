@@ -13,11 +13,12 @@ export function Game() {
   const [player, setPlayer] = useState<IPlayer>(1);
   const [winner, setWinner] = useState<IPlayer | null>(null);
   const [winningLine, setWinningLine] = useState<IBoard>([]);
-  const [isMutli, setIsMulti] = useState(false);
+  const [isMulti, setIsMulti] = useState(false);
 
   const boardRef = useRef<BoardHandle>(null);
 
-  const { playClickAudio, playWinAudio } = useAudio();
+  const { playClickAudio, playWinAudio, playLooseAudio, playDrawSound } =
+    useAudio();
 
   const resetGame = () => {
     setPlayer(1);
@@ -41,15 +42,20 @@ export function Game() {
 
     const result = checkWinner(board);
     if (result.winner) {
-      celebrateWin();
+      if (!isMulti && result.winner === -1) {
+        playLooseAudio();
+      } else {
+        celebrateWin();
+      }
       setWinner(result.winner as IPlayer);
       setWinningLine(result.line);
       return setPlayer(0);
-    } else {
-      setWinner(result.winner as IPlayer);
+    } else if (result.winner === 0) {
+      playDrawSound();
+      return setWinner(0);
     }
 
-    if (!isMutli && player === 1) {
+    if (!isMulti && player === 1) {
       setTimeout(() => boardRef.current?.computerMove(), 500);
     }
     togglePlayer();
@@ -60,11 +66,13 @@ export function Game() {
       <Status player={player} />
       <Controls
         handleReset={resetGame}
-        isMulti={isMutli}
+        isMulti={isMulti}
         setItMulti={setIsMulti}
       />
       <div className="game-board">
-        {winner !== null && <Winner winner={winner} onReset={resetGame} />}
+        {winner !== null && (
+          <Winner isMulti={isMulti} winner={winner} onReset={resetGame} />
+        )}
         <Board
           ref={boardRef}
           player={player}
