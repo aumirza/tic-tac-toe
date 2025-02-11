@@ -2,6 +2,12 @@ import { createContext } from "preact";
 import { ReactElement, useEffect, useState, useRef } from "preact/compat";
 import { Howl } from "howler";
 
+import clickSound from "../assets/click.mp3";
+import backgroundMusic from "../assets/background.mp3";
+import winSound from "../assets/win.mp3";
+import looseSound from "../assets/loose.mp3";
+import drawSound from "../assets/draw.mp3";
+
 interface IAudioContext {
   soundEnabled: boolean;
   musicEnabled: boolean;
@@ -36,25 +42,33 @@ export const AudioProvider = ({ children }: { children: ReactElement }) => {
     setSoundEnabled((prev) => !prev);
   };
 
-  const clickAudioRef = useRef(new Howl({ src: ["/click.mp3"], volume: 1 }));
+  const clickAudioRef = useRef<Howl | null>(null);
+  const bgMusicRef = useRef<Howl | null>(null);
+  const winSoundRef = useRef<Howl | null>(null);
+  const looseSoundRef = useRef<Howl | null>(null);
+  const drawSoundRef = useRef<Howl | null>(null);
 
-  const bgMusicRef = useRef(
-    new Howl({ src: ["/background.mp3"], loop: true, volume: 0.5 })
-  );
-
-  const winSoundRef = useRef(new Howl({ src: ["/win.mp3"], volume: 1 }));
-  const looseSoundRef = useRef(new Howl({ src: ["/loose.mp3"], volume: 1 }));
-  const drawSoundRef = useRef(new Howl({ src: ["/draw.mp3"], volume: 1 }));
+  useEffect(() => {
+    clickAudioRef.current = new Howl({ src: [clickSound], volume: 1 });
+    bgMusicRef.current = new Howl({
+      src: [backgroundMusic],
+      loop: true,
+      volume: 0.5,
+    });
+    winSoundRef.current = new Howl({ src: [winSound], volume: 1 });
+    looseSoundRef.current = new Howl({ src: [looseSound], volume: 1 });
+    drawSoundRef.current = new Howl({ src: [drawSound], volume: 1 });
+  }, []);
 
   const playLooseAudio = () => {
     if (!soundEnabled) return;
-    bgMusicRef.current.pause();
-    looseSoundRef.current.play();
+    bgMusicRef.current?.pause();
+    looseSoundRef.current?.play();
 
-    looseSoundRef.current.on("end", () => {
+    looseSoundRef.current?.on("end", () => {
       if (musicEnabled) {
         setTimeout(() => {
-          bgMusicRef.current.play();
+          bgMusicRef.current?.play();
         }, 1000);
       }
     });
@@ -62,13 +76,13 @@ export const AudioProvider = ({ children }: { children: ReactElement }) => {
 
   const playDrawSound = () => {
     if (!soundEnabled) return;
-    bgMusicRef.current.pause();
-    drawSoundRef.current.play();
+    bgMusicRef.current?.pause();
+    drawSoundRef.current?.play();
 
-    drawSoundRef.current.on("end", () => {
+    drawSoundRef.current?.on("end", () => {
       if (musicEnabled) {
         setTimeout(() => {
-          bgMusicRef.current.play();
+          bgMusicRef.current?.play();
         }, 1000);
       }
     });
@@ -76,13 +90,13 @@ export const AudioProvider = ({ children }: { children: ReactElement }) => {
 
   const playWinAudio = () => {
     if (!soundEnabled) return;
-    bgMusicRef.current.pause();
-    winSoundRef.current.play();
+    bgMusicRef.current?.pause();
+    winSoundRef.current?.play();
 
-    winSoundRef.current.on("end", () => {
+    winSoundRef.current?.on("end", () => {
       if (musicEnabled) {
         setTimeout(() => {
-          bgMusicRef.current.play();
+          bgMusicRef.current?.play();
         }, 1000);
       }
     });
@@ -90,17 +104,17 @@ export const AudioProvider = ({ children }: { children: ReactElement }) => {
 
   const playClickAudio = () => {
     if (!soundEnabled) return;
-    clickAudioRef.current.play();
+    clickAudioRef.current?.play();
   };
 
   useEffect(() => {
     if (musicEnabled) {
-      bgMusicRef.current.play();
+      bgMusicRef.current?.play();
     } else {
-      bgMusicRef.current.stop();
+      bgMusicRef.current?.stop();
     }
 
-    return () => bgMusicRef.current.stop();
+    return () => bgMusicRef.current?.stop();
   }, [musicEnabled]);
 
   return (
