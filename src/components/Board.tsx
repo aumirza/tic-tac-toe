@@ -9,11 +9,12 @@ const emptyBoard = () =>
 interface BoardProps {
   onMark: (board: IBoard) => void;
   player: IPlayer;
+  isMulti: boolean;
   winningLine: IBoard;
 }
 
 export const Board = forwardRef<BoardHandle, BoardProps>(
-  ({ onMark, player, winningLine }, ref) => {
+  ({ isMulti, onMark, player, winningLine }, ref) => {
     useImperativeHandle(ref, () => ({ resetBoard, computerMove }));
 
     const [board, setBoard] = useState<IBoard>(emptyBoard());
@@ -49,6 +50,7 @@ export const Board = forwardRef<BoardHandle, BoardProps>(
           <div key={i} className="board-row">
             {row.map((col, j) => (
               <Square
+                disabled={!isMulti && player === -1}
                 mark={col as IPlayer}
                 player={player}
                 onClick={() => handleMark(i, j)}

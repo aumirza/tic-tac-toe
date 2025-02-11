@@ -63,7 +63,7 @@ export function Game() {
 
   return (
     <div className="game">
-      <Status player={player} />
+      <Status player={player} isMulti={isMulti} />
       <Controls
         handleReset={resetGame}
         isMulti={isMulti}
@@ -74,6 +74,7 @@ export function Game() {
           <Winner isMulti={isMulti} winner={winner} onReset={resetGame} />
         )}
         <Board
+          isMulti={isMulti}
           ref={boardRef}
           player={player}
           onMark={onMark}
