@@ -18,7 +18,7 @@ export function App() {
 
         <footer className="app-footer">
           <p>
-            Created with <span className="heart-icon">❤️</span> by
+            Created with <span className="heart-icon">❤️</span> by&nbsp;
             <a href="https://ahmadullah.in">Ahmadullah mirza</a>
           </p>
           <p>&copy; {new Date().getFullYear()} All rights reserved</p>

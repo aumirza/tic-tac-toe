@@ -43,6 +43,10 @@
   gap: 0.5em;
 }
 
+.app-footer a:link {
+  color: while;
+}
+
 .heart-icon {
   color: #e74c3c;
   animation: pulse 1.5s infinite;
