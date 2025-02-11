@@ -7,11 +7,13 @@ import { throwConfetti } from "../utils/confetti";
 import { Board } from "./Board";
 import { Controls } from "./Controls";
 import { Winner } from "./Winner";
+import { Status } from "./Status";
 
 export function Game() {
   const [player, setPlayer] = useState<IPlayer>(1);
   const [winner, setWinner] = useState<IPlayer | null>(null);
   const [winningLine, setWinningLine] = useState<IBoard>([]);
+  const [isMutli, setIsMulti] = useState(false);
 
   const boardRef = useRef<BoardHandle>(null);
 
@@ -47,16 +49,20 @@ export function Game() {
       setWinner(result.winner as IPlayer);
     }
 
+    if (!isMutli && player === 1) {
+      setTimeout(() => boardRef.current?.computerMove(), 500);
+    }
     togglePlayer();
   };
 
   return (
     <div className="game">
-      <div className="status">
-        Player:
-        <img src={getPlayerIcon(player)} alt="" />
-      </div>
-      <Controls handleReset={resetGame} />
+      <Status player={player} />
+      <Controls
+        handleReset={resetGame}
+        isMulti={isMutli}
+        setItMulti={setIsMulti}
+      />
       <div className="game-board">
         {winner !== null && <Winner winner={winner} onReset={resetGame} />}
         <Board

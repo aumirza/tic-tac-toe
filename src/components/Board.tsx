@@ -13,12 +13,25 @@ interface BoardProps {
 
 export const Board = forwardRef<BoardHandle, BoardProps>(
   ({ onMark, player, winningLine }, ref) => {
-    useImperativeHandle(ref, () => ({ resetBoard }));
+    useImperativeHandle(ref, () => ({ resetBoard, computerMove }));
 
     const [board, setBoard] = useState<IBoard>(emptyBoard());
 
     const resetBoard = () => {
       setBoard(emptyBoard());
+    };
+
+    const emptyCells = () =>
+      board
+        .map((row, i) => row.map((cell, j) => (cell === 0 ? [i, j] : null)))
+        .flat()
+        .filter(Boolean) as [number, number][];
+
+    const computerMove = () => {
+      const allEmptyCells = emptyCells();
+      const randomIndex = Math.floor(Math.random() * allEmptyCells.length);
+      const [i, j] = emptyCells()[randomIndex];
+      handleMark(i, j);
     };
 
     const handleMark = (i: number, j: number) => {

@@ -4,4 +4,5 @@ type IBoard = number[][];
 
 interface BoardHandle {
   resetBoard: () => void;
+  computerMove: () => void;
 }
