@@ -20,3 +20,5 @@ export const minimax = (board: number[], isMaximizing: boolean) => {
 
   return isMaximizing ? Math.max(...scores) : Math.min(...scores);
 };
+
+// TODO: add alpha beta pruning
