@@ -1,5 +1,6 @@
 import { checkWinner } from "./checkWinner";
 
+// TODO: add alpha beta pruning
 export const minimax = (board: number[], isMaximizing: boolean) => {
   const twoDBoard: IBoard = Array.from({ length: 3 }, (_, i) =>
     board.slice(i * 3, i * 3 + 3)
@@ -21,4 +22,22 @@ export const minimax = (board: number[], isMaximizing: boolean) => {
   return isMaximizing ? Math.max(...scores) : Math.min(...scores);
 };
 
-// TODO: add alpha beta pruning
+export function minimaxMove(board: number[]) {
+  let bestScore = -Infinity;
+
+  let moveIndex: number | null = null;
+
+  board.forEach((cell, index) => {
+    if (!cell) {
+      const newBoard = [...board];
+      newBoard[index] = -1;
+      const score = minimax(newBoard, false);
+      if (score > bestScore) {
+        bestScore = score;
+        moveIndex = index;
+      }
+    }
+  });
+
+  return moveIndex;
+}

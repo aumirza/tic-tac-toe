@@ -1,7 +1,7 @@
 import { useState, useImperativeHandle } from "preact/hooks";
 import { Square } from "./Square";
 import { forwardRef } from "preact/compat";
-import { bestMove } from "../utils/computer";
+import { useComputer } from "../hooks/useComputer";
 
 const emptyBoard = () =>
   new Array(3).fill(0).map(() => new Array(3).fill(0)) as IBoard;
@@ -19,16 +19,21 @@ export const Board = forwardRef<BoardHandle, BoardProps>(
 
     const [board, setBoard] = useState<IBoard>(emptyBoard());
 
+    const { bestMove } = useComputer();
+
     const resetBoard = () => {
       setBoard(emptyBoard());
     };
 
-    const computerMove = () => {
-      const move = bestMove(board);
-      if (move) {
-        const [i, j] = move;
-        handleMark(i, j);
-      }
+    const computerMove = async () => {
+      if (player === 1) return;
+
+      bestMove(board).then((move) => {
+        if (move) {
+          const [i, j] = move;
+          handleMark(i, j);
+        }
+      });
     };
 
     const handleMark = (i: number, j: number) => {

@@ -8,6 +8,7 @@ import { Board } from "./Board";
 import { Controls } from "./Controls";
 import { Winner } from "./Winner";
 import { Status } from "./Status";
+import { useComputer } from "../hooks/useComputer";
 
 export function Game() {
   const [player, setPlayer] = useState<IPlayer>(1);
@@ -16,6 +17,7 @@ export function Game() {
   const [isMulti, setIsMulti] = useState(false);
 
   const boardRef = useRef<BoardHandle>(null);
+  const { onGameEnd } = useComputer();
 
   const { playClickAudio, playWinAudio, playLooseAudio, playDrawSound } =
     useAudio();
@@ -42,16 +44,21 @@ export function Game() {
 
     const result = checkWinner(board);
     if (result.winner) {
-      if (!isMulti && result.winner === -1) {
-        playLooseAudio();
-      } else {
-        celebrateWin();
+      if (!isMulti) {
+        if (result.winner === -1) {
+          playLooseAudio();
+        } else {
+          celebrateWin();
+        }
+        onGameEnd(result.winner as IPlayer);
       }
+
       setWinner(result.winner as IPlayer);
       setWinningLine(result.line);
       return setPlayer(0);
     } else if (result.winner === 0) {
       playDrawSound();
+      if (!isMulti) onGameEnd(winner as IPlayer);
       return setWinner(0);
     }
 
