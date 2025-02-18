@@ -4,7 +4,7 @@
 
 # 🎮 Yet Another Tic-Tac-Toe
 
-A **Tic-Tac-Toe** game built with **Preact**, **TypeScript**, **Vite**, and **Plain CSS**. This project showcases advanced **React/Preact** concepts like `Context`, `useImperativeHandle`, and includes **AI-powered moves**. It also features sound effects using **Howler.js**.
+A **Tic-Tac-Toe** game built with **Preact**, **TypeScript**, **Vite**, and **Plain CSS**. This project showcases advanced **React/Preact** concepts like `Context`, `useImperativeHandle`, and includes **AI-powered moves**. It also features **machine learning** using **TensorFlow.js** for training and prediction, along with **Howler.js** for immersive audio effects.
 
 ---
 
@@ -21,6 +21,7 @@ A **Tic-Tac-Toe** game built with **Preact**, **TypeScript**, **Vite**, and **Pl
 - 🔊 **Audio Effects** – Integrated **Howler.js** for smooth game sounds.
 - 🎭 **Multiplayer & Singleplayer** – Play against AI or a friend.
 - 🏗️ **Modern React Patterns** – Uses **Context API** & `useImperativeHandle` for modular component control.
+- 🧠 **Machine Learning Integration** – **TensorFlow.js** enables AI to learn and improve over time.
 
 ---
 
@@ -30,17 +31,23 @@ A **Tic-Tac-Toe** game built with **Preact**, **TypeScript**, **Vite**, and **Pl
 - **[TypeScript](https://www.typescriptlang.org/)** – For type safety & scalability.
 - **[Vite](https://vitejs.dev/)** – Fast build & dev environment.
 - **[Howler.js](https://howlerjs.com/)** – For game sound effects.
+- **[TensorFlow.js](https://www.tensorflow.org/js/)** – Machine learning for training AI models.
 - **Plain CSS** – Minimalistic styling without dependencies.
 
 ---
 
-## 🤖 AI Logic
+## 🤖 AI & Machine Learning
 
-The game’s AI uses the **Minimax Algorithm** to make optimal moves, ensuring a challenging experience.
+The game AI is powered by a combination of:
 
-- **Evaluates all possible moves** to find the best option.
-- **Recursive decision-making** for intelligent gameplay.
-- **Handles both maximizing (AI) & minimizing (player) strategies**.
+- **Minimax Algorithm** – Traditional decision-making for optimal moves.
+- **TensorFlow.js** – **Trains and predicts moves** based on past gameplay.
+
+### 🧠 **How TensorFlow.js Works in This Project**
+
+- AI **learns from previous games** and adapts.
+- **Trains on winning strategies** and improves predictions.
+- **Predicts best moves** based on trained model & Minimax.
 
 ---
 
@@ -49,6 +56,7 @@ The game’s AI uses the **Minimax Algorithm** to make optimal moves, ensuring a
 - **Context API** – Manages global game state efficiently.
 - **useImperativeHandle** – Provides component-level control & flexibility.
 - **Howler.js** – Adds immersive audio experience.
+- **TensorFlow.js** – Handles training and prediction for AI moves.
 
 ---
 
@@ -76,12 +84,13 @@ npm run build
 - Choose Single Player (vs AI) or Multiplayer (vs a friend).
 - Take turns placing X and O on the board.
 - Win the game by getting three in a row (horizontal, vertical, or diagonal).
-- Enjoy sound effects and smooth animations!
+- Enjoy AI-powered moves, smooth animations, and sound effects!
 
 # 🚀 Optimizations
 
 - AI performance tuning for quicker decision-making.
 - Optimized rendering to prevent unnecessary re-renders.
+- Machine Learning Training for more dynamic AI playstyles.
 - Audio preloading for seamless sound effects.
 
 # 🤝 Contributing
