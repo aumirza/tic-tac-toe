@@ -1,6 +1,8 @@
 import { Game } from "./components/Game";
 import { AudioProvider } from "./contexts/audioContext";
 import { ComputerProvider } from "./contexts/computerContext";
+
+import logo from "./assets/yet-another-tic-tac-toe.png";
 import "./style.css";
 
 export function App() {
@@ -9,6 +11,7 @@ export function App() {
       <ComputerProvider>
         <div className="app-wrapper">
           <header className="app-header">
+            <img src={logo} alt="logo" className="app-logo" />
             <h1 className="app-title text-2xl md:text-3xl font-bold">
               Yet Another Tic Tac Toe
             </h1>
