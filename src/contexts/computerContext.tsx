@@ -16,6 +16,8 @@ export const ComputerContext = createContext<IComputerContext>({
   onGameEnd: () => {},
 });
 
+const AI_THRESHOLD = 20;
+
 export const ComputerProvider = ({ children }: { children: ReactElement }) => {
   const [model, setModel] = useState<Sequential | null>(null);
   const [isAiTrained, setIsAiTrained] = useState(false);
@@ -63,12 +65,14 @@ export const ComputerProvider = ({ children }: { children: ReactElement }) => {
       reward,
     }));
 
-    if (model) await trainModel(model, updatedHistory);
+    if (model && gamesPlayed % 5 === 0 && gamesPlayed > 0) {
+      await trainModel(model, updatedHistory);
+    }
 
     setGameHistory([]); // Clear history for next game
     setGamesPlayed((prev) => prev + 1);
 
-    if (gamesPlayed >= 10) {
+    if (gamesPlayed >= AI_THRESHOLD) {
       setIsAiTrained(true); // Enable AI after 10 games
     }
   };

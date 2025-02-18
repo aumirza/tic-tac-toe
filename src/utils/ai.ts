@@ -25,16 +25,16 @@ export async function aiMove(
 
   // Get available moves
   const availableMoves = board
-    .map((cell, i) => (cell === 0 ? i : null))
-    .filter(Boolean) as number[];
-
-  console.log(availableMoves);
+    .map((cell, i) => (cell === 0 ? i : -1))
+    .filter((i) => i !== -1);
 
   if (availableMoves.length === 0) return null;
 
   // Choose the move with the highest Q-value
+  const filteredQValues = qValues.map((val) => (isNaN(val) ? -Infinity : val));
   return availableMoves.reduce(
-    (bestMove, move) => (qValues[move] > qValues[bestMove] ? move : bestMove),
+    (bestMove, move) =>
+      filteredQValues[move] > filteredQValues[bestMove] ? move : bestMove,
     availableMoves[0]
   );
 }
@@ -53,6 +53,8 @@ export async function trainModel(
     output[data.move] = data.reward; // Assign reward
     return output;
   });
+
+  if (xs.length === 0 || ys.length === 0) return;
 
   const xsTensor = tf.tensor2d(xs);
   const ysTensor = tf.tensor2d(ys);

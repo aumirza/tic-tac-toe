@@ -28,12 +28,11 @@ export const Board = forwardRef<BoardHandle, BoardProps>(
     const computerMove = async () => {
       if (player === 1) return;
 
-      bestMove(board).then((move) => {
-        if (move) {
-          const [i, j] = move;
-          handleMark(i, j);
-        }
-      });
+      const move = await bestMove(board);
+      if (move) {
+        const [i, j] = move;
+        handleMark(i, j);
+      }
     };
 
     const handleMark = (i: number, j: number) => {

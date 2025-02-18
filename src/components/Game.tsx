@@ -30,7 +30,7 @@ export function Game() {
   };
 
   const togglePlayer = () => {
-    setPlayer(player === 1 ? -1 : 1);
+    setPlayer((prev) => (prev === 1 ? -1 : 1));
   };
 
   const celebrateWin = () => {
@@ -58,7 +58,7 @@ export function Game() {
       return setPlayer(0);
     } else if (result.winner === 0) {
       playDrawSound();
-      if (!isMulti) onGameEnd(winner as IPlayer);
+      if (!isMulti) onGameEnd(result.winner as IPlayer);
       return setWinner(0);
     }
 
