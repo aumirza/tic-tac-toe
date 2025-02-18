@@ -1,3 +1,7 @@
+<p align="center">
+<img align="center" src="./src/assets/yet-another-tic-tac-toe.png" height="100px" />
+</p>
+
 # 🎮 Yet Another Tic-Tac-Toe
 
 A **Tic-Tac-Toe** game built with **Preact**, **TypeScript**, **Vite**, and **Plain CSS**. This project showcases advanced **React/Preact** concepts like `Context`, `useImperativeHandle`, and includes **AI-powered moves**. It also features sound effects using **Howler.js**.
